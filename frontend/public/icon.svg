@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <!-- Background -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0f2e"/>
+      <stop offset="100%" stop-color="#0a0612"/>
+    </linearGradient>
+
+    <!-- Mic capsule body -->
+    <linearGradient id="capsule" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="35%" stop-color="#9333ea"/>
+      <stop offset="70%" stop-color="#7B3FE4"/>
+      <stop offset="100%" stop-color="#3b0764"/>
+    </linearGradient>
+
+    <!-- Capsule side shadow -->
+    <linearGradient id="capsuleSide" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e9d5ff" stop-opacity="0.15"/>
+      <stop offset="30%" stop-color="#a855f7" stop-opacity="0"/>
+      <stop offset="70%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.35"/>
+    </linearGradient>
+
+    <!-- Neck gradient -->
+    <linearGradient id="neck" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="40%" stop-color="#7B3FE4"/>
+      <stop offset="100%" stop-color="#3b0764"/>
+    </linearGradient>
+
+    <!-- Base gradient -->
+    <linearGradient id="base" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9333ea"/>
+      <stop offset="100%" stop-color="#2e1065"/>
+    </linearGradient>
+
+    <!-- Glow -->
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0.5 0 0 0 0.3  0 0 0.3 0 0.05  0 0 0.8 0 0.5  0 0 0 1 0" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="4" dy="8" stdDeviation="10" flood-color="#7B3FE4" flood-opacity="0.5"/>
+    </filter>
+
+    <!-- Inner shadow on grille -->
+    <filter id="grilleShadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+
+    <!-- Clip for capsule -->
+    <clipPath id="capsuleClip">
+      <rect x="176" y="100" width="160" height="230" rx="80"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+
+  <!-- Ambient purple glow behind mic -->
+  <ellipse cx="256" cy="260" rx="130" ry="160" fill="#7B3FE4" opacity="0.12"/>
+  <ellipse cx="256" cy="260" rx="80" ry="100" fill="#9333ea" opacity="0.1"/>
+
+  <!-- ── BASE ── -->
+  <!-- Base shadow ellipse -->
+  <ellipse cx="256" cy="432" rx="88" ry="14" fill="#000" opacity="0.45"/>
+  <!-- Base body -->
+  <ellipse cx="256" cy="426" rx="80" ry="13" fill="url(#base)"/>
+  <!-- Base highlight -->
+  <ellipse cx="240" cy="422" rx="36" ry="5" fill="white" opacity="0.12"/>
+
+  <!-- ── NECK ── -->
+  <!-- Neck shadow -->
+  <rect x="247" y="338" width="22" height="88" rx="11" fill="#1a0a2e"/>
+  <!-- Neck body -->
+  <rect x="244" y="335" width="24" height="90" rx="12" fill="url(#neck)" filter="url(#shadow)"/>
+  <!-- Neck highlight -->
+  <rect x="246" y="338" width="8" height="84" rx="4" fill="white" opacity="0.12"/>
+
+  <!-- ── MIC CAPSULE ── -->
+  <!-- Capsule outer glow -->
+  <rect x="171" y="95" width="170" height="240" rx="85" fill="#9333ea" opacity="0.3" filter="url(#glow)"/>
+
+  <!-- Capsule body -->
+  <rect x="176" y="100" width="160" height="230" rx="80" fill="url(#capsule)" filter="url(#shadow)"/>
+
+  <!-- Grille lines (clipped to capsule) -->
+  <g clip-path="url(#capsuleClip)" opacity="0.9">
+    <!-- Horizontal grille slots -->
+    <rect x="185" y="155" width="142" height="5" rx="2.5" fill="#000" opacity="0.25"/>
+    <rect x="181" y="170" width="150" height="5" rx="2.5" fill="#000" opacity="0.25"/>
+    <rect x="179" y="185" width="154" height="5" rx="2.5" fill="#000" opacity="0.25"/>
+    <rect x="178" y="200" width="156" height="5" rx="2.5" fill="#000" opacity="0.25"/>
+    <rect x="178" y="215" width="156" height="5" rx="2.5" fill="#000" opacity="0.25"/>
+    <rect x="178" y="230" width="156" height="5" rx="2.5" fill="#000" opacity="0.25"/>
+    <rect x="178" y="245" width="156" height="5" rx="2.5" fill="#000" opacity="0.25"/>
+    <rect x="179" y="260" width="154" height="5" rx="2.5" fill="#000" opacity="0.25"/>
+    <rect x="181" y="275" width="150" height="5" rx="2.5" fill="#000" opacity="0.25"/>
+    <rect x="185" y="290" width="142" height="5" rx="2.5" fill="#000" opacity="0.25"/>
+
+    <!-- Brighter slot highlights between lines -->
+    <rect x="185" y="161" width="142" height="3" rx="1.5" fill="white" opacity="0.06"/>
+    <rect x="181" y="176" width="150" height="3" rx="1.5" fill="white" opacity="0.06"/>
+    <rect x="179" y="191" width="154" height="3" rx="1.5" fill="white" opacity="0.06"/>
+    <rect x="178" y="206" width="156" height="3" rx="1.5" fill="white" opacity="0.06"/>
+    <rect x="178" y="221" width="156" height="3" rx="1.5" fill="white" opacity="0.06"/>
+    <rect x="178" y="236" width="156" height="3" rx="1.5" fill="white" opacity="0.06"/>
+    <rect x="178" y="251" width="156" height="3" rx="1.5" fill="white" opacity="0.06"/>
+    <rect x="179" y="266" width="154" height="3" rx="1.5" fill="white" opacity="0.06"/>
+    <rect x="181" y="281" width="150" height="3" rx="1.5" fill="white" opacity="0.06"/>
+
+    <!-- Side lighting overlay -->
+    <rect x="176" y="100" width="160" height="230" rx="80" fill="url(#capsuleSide)"/>
+  </g>
+
+  <!-- 3D specular highlight (top-left sphere effect) -->
+  <ellipse cx="222" cy="148" rx="34" ry="42" fill="white" opacity="0.13"/>
+  <ellipse cx="218" cy="138" rx="18" ry="22" fill="white" opacity="0.18"/>
+  <ellipse cx="214" cy="130" rx="8" ry="10" fill="white" opacity="0.22"/>
+
+  <!-- Bottom capsule rim reflection -->
+  <ellipse cx="256" cy="318" rx="60" ry="8" fill="white" opacity="0.06"/>
+
+  <!-- Capsule top rim (chrome) -->
+  <ellipse cx="256" cy="100" rx="80" ry="18" fill="#c084fc" opacity="0.3"/>
+  <ellipse cx="256" cy="100" rx="60" ry="10" fill="white" opacity="0.1"/>
+
+  <!-- Status LED dot on neck -->
+  <circle cx="256" cy="352" r="5" fill="#e879f9"/>
+  <circle cx="256" cy="352" r="3" fill="white" opacity="0.6"/>
+  <circle cx="256" cy="352" r="8" fill="#e879f9" opacity="0.2"/>
+</svg>
