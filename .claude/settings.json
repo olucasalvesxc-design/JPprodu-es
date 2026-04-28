@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p 'c:/Users/senha1234/OneDrive/Documentos/CLAUDE CODE/Spottunner/backend/src/config')",
+      "Bash(mkdir -p 'c:/Users/senha1234/OneDrive/Documentos/CLAUDE CODE/Spottunner/backend/src/controllers')",
+      "Bash(mkdir -p 'c:/Users/senha1234/OneDrive/Documentos/CLAUDE CODE/Spottunner/backend/src/middleware')",
+      "Bash(mkdir -p 'c:/Users/senha1234/OneDrive/Documentos/CLAUDE CODE/Spottunner/backend/src/routes')",
+      "Bash(mkdir -p 'c:/Users/senha1234/OneDrive/Documentos/CLAUDE CODE/Spottunner/backend/src/utils')",
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "PowerShell(psql --version 2>&1)",
+      "PowerShell(if \\(-not $?\\) { \"PostgreSQL n�o encontrado no PATH\" })",
+      "Read(//c/Program Files/**)",
+      "PowerShell(winget --version)",
+      "PowerShell(winget install --id PostgreSQL.PostgreSQL.17 --accept-package-agreements --accept-source-agreements --silent)",
+      "PowerShell(Start-Process \"http://localhost:5173\")",
+      "PowerShell(gh --version 2>&1)",
+      "PowerShell(winget install --id GitHub.cli --accept-package-agreements --accept-source-agreements)"
+    ]
+  }
+}
