@@ -15,6 +15,18 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "JP Produções | Áudio Profissional para sua Marca",
   description: "Criamos jingles e spots com qualidade de estúdio, prontos para usar no seu negócio.",
+  metadataBase: new URL("https://www.jpproducoes.online"),
+  openGraph: {
+    title: "JP Produções | Áudio Profissional para sua Marca",
+    description: "Criamos jingles e spots com qualidade de estúdio, prontos para usar no seu negócio.",
+    url: "https://www.jpproducoes.online",
+    siteName: "JP Produções",
+    images: [{ url: "/audio/link.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/audio/link.png"],
+  },
 };
 
 export default function RootLayout({
