@@ -78,11 +78,16 @@ export default function Home() {
   };
 
   const getCalculatedPriceValue = (count: number) => {
-    if (count <= 70) return 35;
-    if (count <= 100) return 40;
-    const additionalWords = count - 100;
-    const additionalBlocks = Math.ceil(additionalWords / 30);
-    return 40 + (additionalBlocks * 10);
+    let base;
+    if (count <= 70) base = 50;
+    else if (count <= 100) base = 60;
+    else {
+      const additionalWords = count - 100;
+      const additionalBlocks = Math.ceil(additionalWords / 30);
+      base = 60 + (additionalBlocks * 10);
+    }
+    if (selectedService === 'Spot com Jingle (Completo)') base += 50;
+    return base;
   };
 
   const getPrice = (count: number) => {
@@ -599,8 +604,8 @@ export default function Home() {
                         <span className="text-[10px] font-bold text-white/20">500</span>
                       </div>
                       <div className="mt-4 flex flex-wrap gap-2">
-                        <div className="px-2 py-1 rounded bg-white/5 border border-white/5 text-[8px] font-bold text-white/40 uppercase">Até 70: R$ 35</div>
-                        <div className="px-2 py-1 rounded bg-white/5 border border-white/5 text-[8px] font-bold text-white/40 uppercase">Até 100: R$ 40</div>
+                        <div className="px-2 py-1 rounded bg-white/5 border border-white/5 text-[8px] font-bold text-white/40 uppercase">Spot padrão: R$ 50+</div>
+                        <div className="px-2 py-1 rounded bg-[#FF2D2D]/10 border border-[#FF2D2D]/20 text-[8px] font-bold text-[#FF2D2D] uppercase">Jingle: R$ 100+</div>
                         <div className="px-2 py-1 rounded bg-white/5 border border-white/5 text-[8px] font-bold text-white/40 uppercase">+30 palavras: +R$ 10</div>
                       </div>
                     </div>
@@ -859,6 +864,7 @@ export default function Home() {
                             className="bg-transparent text-white font-display font-medium outline-none w-full appearance-none"
                          >
                             <option value="Spot Comercial" className="bg-[#111]">Spot Comercial</option>
+                            <option value="Spot com Jingle (Completo)" className="bg-[#111]">Spot com Jingle (Completo)</option>
                             <option value="Jingles" className="bg-[#111]">Jingles</option>
                             <option value="Institucional" className="bg-[#111]">Institucional</option>
                             <option value="Espera Telefônica" className="bg-[#111]">Espera Telefônica</option>
@@ -879,6 +885,31 @@ export default function Home() {
                             <option value="Narrativa / Storytelling" className="bg-[#111]">Narrativa / Storytelling</option>
                          </select>
                       </div>
+                      <div className={`sm:col-span-2 p-5 rounded-2xl border transition-all ${
+                        selectedService === 'Spot com Jingle (Completo)'
+                          ? 'bg-[#FF2D2D]/10 border-[#FF2D2D]/30 shadow-[0_0_20px_rgba(255,45,45,0.1)]'
+                          : 'bg-white/[0.02] border-white/5'
+                      }`}>
+                        {selectedService === 'Spot com Jingle (Completo)' ? (
+                          <div>
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-[8px] bg-[#FF2D2D] text-white px-2 py-0.5 rounded font-black uppercase tracking-widest">Premium</span>
+                              <span className="text-[8px] bg-white/10 text-white/50 px-2 py-0.5 rounded font-black uppercase tracking-widest">Qualidade premium</span>
+                            </div>
+                            <p className="text-[#FF2D2D] font-black text-base md:text-lg uppercase tracking-tight leading-tight" style={{ textShadow: '0 0 12px rgba(255,45,45,0.4)' }}>SPOT COM JINGLE A PARTIR DE R$ 100,00</p>
+                            <p className="text-white/50 text-xs mt-1 font-medium">Spot completo para impressionar!</p>
+                          </div>
+                        ) : (
+                          <div>
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-[8px] bg-white/10 text-white/50 px-2 py-0.5 rounded font-black uppercase tracking-widest">Mais vendido</span>
+                              <span className="text-[8px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded font-black uppercase tracking-widest">Entrega rápida</span>
+                            </div>
+                            <p className="text-white font-black text-base md:text-lg uppercase tracking-tight leading-tight">SPOT PADRÃO A PARTIR DE R$ 50,00 PRONTO!</p>
+                          </div>
+                        )}
+                      </div>
+
                       <div className="sm:col-span-2 p-4 glass-dark rounded-2xl border border-white/5">
                          <label className="text-[10px] text-white/20 uppercase font-black tracking-widest mb-2 block">Nome do Cliente (Obrigatório)</label>
                          <input 
@@ -932,19 +963,45 @@ export default function Home() {
                      <h3 className="text-2xl font-display font-medium text-white mb-2">Resumo do Pedido</h3>
                      <p className="text-white/30 text-sm mb-10">Confira os valores estimados antes de enviar.</p>
 
-                     <div className="space-y-6 mb-10">
-                        <div className="flex justify-between items-center py-4 border-b border-white/5">
-                           <span className="text-white/40 text-sm">Valor Estimado</span>
-                           <span className="text-2xl font-display font-medium text-[#FF2D2D]">{calculatedPrice}</span>
+                     <div className="space-y-3 mb-10">
+                        <div className="flex justify-between items-center py-3 border-b border-white/5">
+                           <span className="text-white/40 text-sm">Tipo de Serviço</span>
+                           <div className="flex items-center gap-2">
+                             {selectedService === 'Spot com Jingle (Completo)' && (
+                               <span className="text-[7px] bg-[#FF2D2D] text-white px-1.5 py-0.5 rounded font-black uppercase tracking-widest">Premium</span>
+                             )}
+                             <span className="text-white font-display font-medium text-sm text-right max-w-[160px] leading-tight">{selectedService}</span>
+                           </div>
                         </div>
-                        <div className="flex justify-between items-center py-4 border-b border-white/5">
-                           <span className="text-white/40 text-sm">Prazo de Entrega</span>
-                           <span className="text-white font-display font-medium">Até 24h</span>
-                        </div>
-                        <div className="flex justify-between items-center py-4 border-b border-white/5">
+                        <div className="flex justify-between items-center py-3 border-b border-white/5">
                            <span className="text-white/40 text-sm">Palavras</span>
                            <span className="text-white font-display font-medium">{wordCount}</span>
                         </div>
+                        <div className="flex justify-between items-center py-3 border-b border-white/5">
+                           <span className="text-white/40 text-sm">Valor Estimado</span>
+                           <motion.span
+                             key={calculatedPrice}
+                             initial={{ scale: 0.9, opacity: 0 }}
+                             animate={{ scale: 1, opacity: 1 }}
+                             className="text-2xl font-display font-medium text-[#FF2D2D]"
+                           >{calculatedPrice}</motion.span>
+                        </div>
+                        <div className="flex justify-between items-center py-3 border-b border-white/5">
+                           <span className="text-white/40 text-sm">Prazo de Entrega</span>
+                           <span className="font-black uppercase tracking-wider text-sm text-[#FF2D2D]" style={{ textShadow: '0 0 10px rgba(255,45,45,0.6)' }}>EM ATÉ 2 HORAS</span>
+                        </div>
+                        {clientName && (
+                          <div className="flex justify-between items-center py-3 border-b border-white/5">
+                             <span className="text-white/40 text-sm">Cliente</span>
+                             <span className="text-white font-display font-medium">{clientName}</span>
+                          </div>
+                        )}
+                        {whatsapp && (
+                          <div className="flex justify-between items-center py-3 border-b border-white/5">
+                             <span className="text-white/40 text-sm">WhatsApp</span>
+                             <span className="text-white font-display font-medium">{whatsapp}</span>
+                          </div>
+                        )}
                      </div>
 
                      <AnimatePresence>
