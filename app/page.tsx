@@ -48,7 +48,6 @@ const voices = [
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  const [wordCount, setWordCount] = useState(60);
   const [selectedVoice, setSelectedVoice] = useState(voices[0]);
   const [script, setScript] = useState('');
   const [orderStyle, setOrderStyle] = useState('Varejo (Impacto)');
@@ -65,39 +64,13 @@ export default function Home() {
   const [demoDuration, setDemoDuration] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
-  const countWords = (text: string) => {
-    const trimmed = text.trim();
-    if (!trimmed) return 0;
-    return trimmed.split(/\s+/).filter(word => word.length > 0).length;
-  };
-
   const selectServiceAndScroll = (serviceName: string, style: string) => {
     setSelectedService(serviceName);
     setOrderStyle(style);
     document.getElementById('studio')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const getCalculatedPriceValue = (count: number) => {
-    let base;
-    if (count <= 70) base = 50;
-    else if (count <= 100) base = 60;
-    else {
-      const additionalWords = count - 100;
-      const additionalBlocks = Math.ceil(additionalWords / 30);
-      base = 60 + (additionalBlocks * 10);
-    }
-    if (selectedService === 'Spot com Jingle (Completo)') base += 50;
-    return base;
-  };
-
-  const getPrice = (count: number) => {
-    return getCalculatedPriceValue(count).toLocaleString('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    });
-  };
-
-  const calculatedPrice = getPrice(wordCount);
+  const calculatedPrice = selectedService === 'Spot com Jingle (Completo)' ? 'R$ 100,00' : 'R$ 50,00';
 
   const saveOrder = (newOrder: any) => {
     const existingOrders = JSON.parse(localStorage.getItem('jp_orders') || '[]');
@@ -120,11 +93,6 @@ export default function Home() {
       return;
     }
 
-    if (wordCount < 10) {
-      setError("A quantidade mínima é de 10 palavras.");
-      return;
-    }
-
     setIsSubmitting(true);
 
     const orderId = `JP-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
@@ -136,7 +104,6 @@ export default function Home() {
       vozSelecionada: selectedVoice.name,
       tipoServico: selectedService,
       estiloLocucao: orderStyle,
-      quantidadePalavras: wordCount,
       valorEstimado: calculatedPrice,
       status: "Novo pedido",
       dataCriacao: new Date().toISOString(),
@@ -151,7 +118,6 @@ export default function Home() {
       `*Voz escolhida:* ${selectedVoice.name}%0A` +
       `*Tipo de serviço:* ${selectedService}%0A` +
       `*Estilo da locução:* ${orderStyle}%0A` +
-      `*Quantidade de palavras:* ${wordCount}%0A` +
       `*Valor estimado:* ${calculatedPrice}%0A%0A` +
       `*Script:*%0A${script}%0A%0A` +
       `Quero confirmar esse orçamento.`;
@@ -567,69 +533,32 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Calculator Input */}
-                <div className="space-y-8">
-                  <div>
-                    <label className="text-[10px] font-black text-white/20 uppercase tracking-[0.3em] mb-4 block">Quantidade de palavras</label>
-                    <div className="relative">
-                      <div className="flex items-center gap-6 mb-4">
-                        <input 
-                          type="range"
-                          min="10"
-                          max="500"
-                          value={wordCount}
-                          onChange={(e) => setWordCount(parseInt(e.target.value))}
-                          className="flex-1 h-1.5 bg-white/5 rounded-full appearance-none cursor-pointer accent-[#FF2D2D]"
-                        />
-                        <div className="bg-white/5 border border-white/10 rounded-xl px-3 py-2 min-w-[90px] flex items-center justify-center gap-2">
-                           <input 
-                             type="number"
-                             value={wordCount}
-                             onChange={(e) => setWordCount(Math.max(10, parseInt(e.target.value) || 0))}
-                             className="bg-transparent text-white font-display font-medium outline-none w-10 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                           />
-                           <span className="text-[8px] text-white/20 font-black uppercase">WDS</span>
+                {/* Planos Fixos */}
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black text-white/20 uppercase tracking-[0.3em] block">Escolha seu plano</label>
+                  {[
+                    { name: 'Spot Padrão', value: 'Spot Comercial', price: 'R$ 50,00', badge: 'Mais vendido', badgeColor: 'bg-white/10 text-white/50', desc: 'Locução profissional pronto!' },
+                    { name: 'Spot com Jingle', value: 'Spot com Jingle (Completo)', price: 'R$ 100,00', badge: 'Premium', badgeColor: 'bg-[#FF2D2D] text-white', desc: 'Spot completo para impressionar!' },
+                  ].map((plan) => (
+                    <button
+                      key={plan.value}
+                      onClick={() => setSelectedService(plan.value)}
+                      className={`w-full flex items-center justify-between p-4 rounded-2xl border transition-all text-left ${
+                        selectedService === plan.value
+                          ? 'bg-[#FF2D2D]/10 border-[#FF2D2D]/40 shadow-[0_0_20px_rgba(255,45,45,0.1)]'
+                          : 'bg-white/[0.02] border-white/5 hover:border-white/10'
+                      }`}
+                    >
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className={`text-[7px] px-1.5 py-0.5 rounded font-black uppercase tracking-widest ${plan.badgeColor}`}>{plan.badge}</span>
                         </div>
+                        <p className="text-sm font-bold text-white">{plan.name}</p>
+                        <p className="text-[10px] text-white/40 mt-0.5">{plan.desc}</p>
                       </div>
-                      <div className="flex justify-between mt-2">
-                        <span className="text-[10px] font-bold text-white/20">10</span>
-                        <motion.span 
-                          key={wordCount}
-                          initial={{ scale: 0.9, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 1 }}
-                          className="text-2xl font-display font-medium text-white"
-                        >
-                          {wordCount} <span className="text-[10px] text-white/30 font-sans uppercase tracking-widest ml-1">palavras</span>
-                        </motion.span>
-                        <span className="text-[10px] font-bold text-white/20">500</span>
-                      </div>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        <div className="px-2 py-1 rounded bg-white/5 border border-white/5 text-[8px] font-bold text-white/40 uppercase">Spot padrão: R$ 50+</div>
-                        <div className="px-2 py-1 rounded bg-[#FF2D2D]/10 border border-[#FF2D2D]/20 text-[8px] font-bold text-[#FF2D2D] uppercase">Jingle: R$ 100+</div>
-                        <div className="px-2 py-1 rounded bg-white/5 border border-white/5 text-[8px] font-bold text-white/40 uppercase">+30 palavras: +R$ 10</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="h-px bg-white/5" />
-
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <label className="text-[10px] font-black text-white/20 uppercase tracking-[0.3em] mb-1 block">Valor Estimado</label>
-                      <motion.p 
-                        key={calculatedPrice}
-                        initial={{ y: 10, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        className="text-4xl md:text-5xl font-display font-medium text-[#FF2D2D] tracking-tighter"
-                      >
-                        {calculatedPrice}
-                      </motion.p>
-                    </div>
-                    <div className="glass rounded-2xl p-4 flex flex-col items-center">
-                      <div className="text-[8px] font-black text-white/40 uppercase tracking-widest mb-1 leading-none">Minutos</div>
-                      <div className="text-xl font-display font-medium text-white">~01:30</div>
-                    </div>
-                  </div>
+                      <p className={`text-2xl font-black tracking-tighter transition-colors ${selectedService === plan.value ? 'text-[#FF2D2D]' : 'text-white/60'}`}>{plan.price}</p>
+                    </button>
+                  ))}
                 </div>
 
                 {/* Micro Features */}
@@ -730,11 +659,11 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="flex gap-6 overflow-x-auto pb-6 pr-6 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
               {voices.map((voice, i) => (
-                <VoiceCard 
-                  key={voice.id} 
-                  voice={voice} 
+                <div key={voice.id} className="flex-shrink-0 w-[300px] snap-start">
+                <VoiceCard
+                  voice={voice}
                   index={i} 
                   isSelected={selectedVoice.id === voice.id}
                   onSelect={() => setSelectedVoice(voice)}
@@ -792,6 +721,7 @@ export default function Home() {
                     }
                   }}
                 />
+                </div>
               ))}
             </div>
           </div>
@@ -833,81 +763,32 @@ export default function Home() {
                     </div>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="sm:col-span-2 p-4 glass-dark rounded-2xl border border-white/5">
-                        <label className="text-[10px] text-white/20 uppercase font-black tracking-widest mb-4 block">Quantidade de Palavras</label>
-                        <div className="flex items-center gap-6">
-                          <input 
-                            type="range"
-                            min="10"
-                            max="500"
-                            value={wordCount}
-                            onChange={(e) => setWordCount(parseInt(e.target.value))}
-                            className="flex-1 h-1.5 bg-white/5 rounded-full appearance-none cursor-pointer accent-[#FF2D2D]"
-                          />
-                          <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2 min-w-[100px]">
-                            <input 
-                              type="number"
-                              value={wordCount}
-                              onChange={(e) => setWordCount(Math.max(10, parseInt(e.target.value) || 0))}
-                              className="bg-transparent text-white font-display font-medium outline-none w-12 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            />
-                            <span className="text-[10px] text-white/20 font-black uppercase">Palavras</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="p-4 glass-dark rounded-2xl border border-white/5">
-                         <label className="text-[10px] text-white/20 uppercase font-black tracking-widest mb-2 block">Tipo de Serviço</label>
-                         <select 
-                            value={selectedService}
-                            onChange={(e) => setSelectedService(e.target.value)}
-                            className="bg-transparent text-white font-display font-medium outline-none w-full appearance-none"
-                         >
-                            <option value="Spot Comercial" className="bg-[#111]">Spot Comercial</option>
-                            <option value="Spot com Jingle (Completo)" className="bg-[#111]">Spot com Jingle (Completo)</option>
-                            <option value="Jingles" className="bg-[#111]">Jingles</option>
-                            <option value="Institucional" className="bg-[#111]">Institucional</option>
-                            <option value="Espera Telefônica" className="bg-[#111]">Espera Telefônica</option>
-                            <option value="Vinhetas / Identidade" className="bg-[#111]">Vinhetas / Identidade</option>
-                         </select>
-                      </div>
-                      <div className="p-4 glass-dark rounded-2xl border border-white/5">
-                         <label className="text-[10px] text-white/20 uppercase font-black tracking-widest mb-2 block">Estilo da Locução</label>
-                         <select 
-                            value={orderStyle}
-                            onChange={(e) => setOrderStyle(e.target.value)}
-                            className="bg-transparent text-white font-display font-medium outline-none w-full appearance-none"
-                         >
-                            <option value="Varejo (Impacto)" className="bg-[#111]">Varejo (Impacto)</option>
-                            <option value="Institucional (Sóbrio)" className="bg-[#111]">Institucional (Sóbrio)</option>
-                            <option value="Suave / Emocional" className="bg-[#111]">Suave / Emocional</option>
-                            <option value="Caricata / Diversos" className="bg-[#111]">Caricata / Diversos</option>
-                            <option value="Narrativa / Storytelling" className="bg-[#111]">Narrativa / Storytelling</option>
-                         </select>
-                      </div>
-                      <div className={`sm:col-span-2 p-5 rounded-2xl border transition-all ${
-                        selectedService === 'Spot com Jingle (Completo)'
-                          ? 'bg-[#FF2D2D]/10 border-[#FF2D2D]/30 shadow-[0_0_20px_rgba(255,45,45,0.1)]'
-                          : 'bg-white/[0.02] border-white/5'
-                      }`}>
-                        {selectedService === 'Spot com Jingle (Completo)' ? (
-                          <div>
-                            <div className="flex items-center gap-2 mb-2">
-                              <span className="text-[8px] bg-[#FF2D2D] text-white px-2 py-0.5 rounded font-black uppercase tracking-widest">Premium</span>
-                              <span className="text-[8px] bg-white/10 text-white/50 px-2 py-0.5 rounded font-black uppercase tracking-widest">Qualidade premium</span>
+                      <div className="sm:col-span-2 space-y-3">
+                        <label className="text-[10px] text-white/20 uppercase font-black tracking-widest block">Escolha o Plano</label>
+                        {[
+                          { name: 'Spot Padrão', value: 'Spot Comercial', price: 'R$ 50,00', badge: 'Mais vendido', badgeColor: 'bg-white/10 text-white/50', desc: 'Locução profissional pronto!' },
+                          { name: 'Spot com Jingle', value: 'Spot com Jingle (Completo)', price: 'R$ 100,00', badge: 'Premium', badgeColor: 'bg-[#FF2D2D] text-white', desc: 'Spot completo para impressionar!' },
+                        ].map((plan) => (
+                          <button
+                            key={plan.value}
+                            type="button"
+                            onClick={() => setSelectedService(plan.value)}
+                            className={`w-full flex items-center justify-between p-4 rounded-2xl border transition-all text-left ${
+                              selectedService === plan.value
+                                ? 'bg-[#FF2D2D]/10 border-[#FF2D2D]/40 shadow-[0_0_20px_rgba(255,45,45,0.1)]'
+                                : 'bg-white/[0.02] border-white/5 hover:border-white/10'
+                            }`}
+                          >
+                            <div>
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className={`text-[7px] px-1.5 py-0.5 rounded font-black uppercase tracking-widest ${plan.badgeColor}`}>{plan.badge}</span>
+                              </div>
+                              <p className="text-sm font-bold text-white">{plan.name}</p>
+                              <p className="text-[10px] text-white/40 mt-0.5">{plan.desc}</p>
                             </div>
-                            <p className="text-[#FF2D2D] font-black text-base md:text-lg uppercase tracking-tight leading-tight" style={{ textShadow: '0 0 12px rgba(255,45,45,0.4)' }}>SPOT COM JINGLE A PARTIR DE R$ 100,00</p>
-                            <p className="text-white/50 text-xs mt-1 font-medium">Spot completo para impressionar!</p>
-                          </div>
-                        ) : (
-                          <div>
-                            <div className="flex items-center gap-2 mb-2">
-                              <span className="text-[8px] bg-white/10 text-white/50 px-2 py-0.5 rounded font-black uppercase tracking-widest">Mais vendido</span>
-                              <span className="text-[8px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded font-black uppercase tracking-widest">Entrega rápida</span>
-                            </div>
-                            <p className="text-white font-black text-base md:text-lg uppercase tracking-tight leading-tight">SPOT PADRÃO A PARTIR DE R$ 50,00 PRONTO!</p>
-                          </div>
-                        )}
+                            <p className={`text-2xl font-black tracking-tighter transition-colors ${selectedService === plan.value ? 'text-[#FF2D2D]' : 'text-white/50'}`}>{plan.price}</p>
+                          </button>
+                        ))}
                       </div>
 
                       <div className="sm:col-span-2 p-4 glass-dark rounded-2xl border border-white/5">
@@ -937,16 +818,7 @@ export default function Home() {
                     <div className="p-1 glass-dark rounded-[2rem] border border-white/5 focus-within:border-[#FF2D2D]/30 transition-all">
                       <textarea 
                         value={script}
-                        onChange={(e) => {
-                          const text = e.target.value;
-                          setScript(text);
-                          const words = countWords(text);
-                          if (words > 0) {
-                            setWordCount(words);
-                          } else if (text === '') {
-                             setWordCount(10); // Default or zero? Let's keep it at min 10 for price logic if empty, or just let users adjust.
-                          }
-                        }}
+                        onChange={(e) => setScript(e.target.value)}
                         placeholder="Cole seu texto ou descreva como deseja o áudio..."
                         className="w-full h-40 bg-transparent p-6 text-white/80 placeholder:text-white/10 outline-none resize-none font-medium leading-relaxed"
                       />
@@ -972,10 +844,6 @@ export default function Home() {
                              )}
                              <span className="text-white font-display font-medium text-sm text-right max-w-[160px] leading-tight">{selectedService}</span>
                            </div>
-                        </div>
-                        <div className="flex justify-between items-center py-3 border-b border-white/5">
-                           <span className="text-white/40 text-sm">Palavras</span>
-                           <span className="text-white font-display font-medium">{wordCount}</span>
                         </div>
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
                            <span className="text-white/40 text-sm">Valor Estimado</span>
