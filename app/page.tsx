@@ -277,7 +277,7 @@ export default function Home() {
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
                   <div>
                     <span className="text-[#FF2D2D] text-[10px] font-bold uppercase tracking-[0.4em] block mb-4">PAINEL DO PRODUTOR</span>
-                    <h2 className="text-5xl font-display font-medium text-white">Pedidos <span className="text-white/30">Recebidos.</span></h2>
+                    <h2 className="text-5xl font-display font-medium text-white">Pedidos <span className="text-brand">Recebidos.</span></h2>
                   </div>
                   <div className="flex gap-4">
                     <div className="glass-dark px-6 py-3 rounded-2xl border border-white/5">
@@ -662,9 +662,9 @@ export default function Home() {
                   IA GENERATIVA
                 </div>
                 <h2 className="text-4xl md:text-6xl font-display font-medium tracking-tight text-white leading-tight mb-4">
-                  Gere seu roteiro <br /><span className="text-white/30">com inteligência artificial.</span>
+                  Gere seu roteiro <br /><span className="text-brand">com inteligência artificial.</span>
                 </h2>
-                <p className="text-white/40 text-lg max-w-xl mx-auto">Descreva seu negócio e a IA cria um roteiro comercial profissional em segundos.</p>
+                <p className="text-white/60 text-lg max-w-xl mx-auto">Descreva seu negócio e a IA cria um roteiro comercial profissional em segundos.</p>
               </div>
 
               <div className="glass rounded-[3rem] p-8 md:p-12 border border-white/[0.05] relative overflow-hidden">
@@ -748,7 +748,7 @@ export default function Home() {
           <div className="container mx-auto">
             <div className="mb-20 text-center lg:text-left">
               <span className="text-[#FF2D2D] text-[10px] font-bold uppercase tracking-[0.4em] block mb-4">CAPACIDADES</span>
-              <h2 className="text-4xl md:text-6xl font-display font-medium tracking-tight text-white leading-tight">Soluções de áudio de <br className="hidden md:block" /> <span className="text-white/30">alta performance.</span></h2>
+              <h2 className="text-4xl md:text-6xl font-display font-medium tracking-tight text-white leading-tight">Soluções de áudio de <br className="hidden md:block" /> <span className="text-brand">alta performance.</span></h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -792,10 +792,10 @@ export default function Home() {
             <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
               <div className="max-w-2xl">
                 <span className="text-[#FF2D2D] text-[10px] font-bold uppercase tracking-[0.4em] block mb-4">GALERIA DE TALENTOS</span>
-                <h2 className="text-5xl md:text-6xl font-display font-medium tracking-tight text-white leading-tight">Vozes que trazem <br className="hidden md:block" /> <span className="text-white/30">sua marca à vida.</span></h2>
+                <h2 className="text-5xl md:text-6xl font-display font-medium tracking-tight text-white leading-tight">Vozes que trazem <br className="hidden md:block" /> <span className="text-brand">sua marca à vida.</span></h2>
               </div>
               <div className="flex flex-col items-end gap-4">
-                <p className="max-w-sm text-white/30 text-sm font-medium leading-relaxed text-right">
+                <p className="max-w-sm text-white/60 text-sm font-medium leading-relaxed text-right">
                   Curadoria rigorosa de profissionais com estúdios de nível mundial.
                 </p>
                 <div className="w-32 h-[1px] bg-white/10" />
@@ -905,7 +905,7 @@ export default function Home() {
                     Solicitar Orçamento
                   </div>
                   <h2 className="text-4xl md:text-5xl font-display font-medium text-white mb-6 leading-tight">
-                    Escolha as vozes e <br /> <span className="text-white/30">feche seu pedido.</span>
+                    Escolha as vozes e <br /> <span className="text-brand">feche seu pedido.</span>
                   </h2>
                   <p className="text-white/40 mb-10 leading-relaxed font-medium">
                     Escolha a voz desejada na galeria acima, ajuste a quantidade de palavras no topo e preencha os detalhes abaixo. Nossa equipe entrará em contato via WhatsApp com a sua prévia profissional.
@@ -993,7 +993,7 @@ export default function Home() {
                      </div>
                      
                      <h3 className="text-2xl font-display font-medium text-white mb-2">Resumo do Pedido</h3>
-                     <p className="text-white/30 text-sm mb-10">Confira os valores estimados antes de enviar.</p>
+                     <p className="text-white/60 text-sm mb-10">Confira os valores estimados antes de enviar.</p>
 
                      <div className="space-y-3 mb-10">
                         <div className="flex justify-between items-center py-3 border-b border-white/5">
@@ -1077,7 +1077,7 @@ export default function Home() {
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
               <span className="text-[#FF2D2D] text-[10px] font-bold uppercase tracking-[0.4em] block mb-4">RASTREAMENTO</span>
               <h2 className="text-4xl md:text-6xl font-display font-medium tracking-tight text-white leading-tight">
-                Acompanhe seu <span className="text-white/30">pedido.</span>
+                Acompanhe seu <span className="text-brand">pedido.</span>
               </h2>
               <p className="text-white/40 text-lg mt-4">Informe o ID do pedido ou seu WhatsApp para ver o status.</p>
             </motion.div>
@@ -1186,7 +1186,7 @@ export default function Home() {
             <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-[#FF2D2D]/10 blur-[120px] rounded-full pointer-events-none" />
             
             <h2 className="text-4xl md:text-7xl font-display font-medium tracking-tighter mb-8 leading-tight">
-              Sua marca merece <br className="hidden md:block" /> <span className="text-white/30">som de alto nível.</span>
+              Sua marca merece <br className="hidden md:block" /> <span className="text-brand">som de alto nível.</span>
             </h2>
             <p className="text-lg md:text-xl text-white/40 mb-12 max-w-2xl mx-auto font-medium">
               Sua marca merece ser ouvida. Comece agora seu primeiro projeto e sinta a diferença que uma produção profissional faz nos seus resultados.
@@ -1212,7 +1212,7 @@ export default function Home() {
                   </div>
                   <span className="font-display font-medium text-xl tracking-tight text-white/90">JP PRODUÇÕES</span>
                 </div>
-                <p className="text-white/30 max-w-sm leading-relaxed text-sm font-medium">
+                <p className="text-white/60 max-w-sm leading-relaxed text-sm font-medium">
                   Elevando o padrão da comunicação sonora global através de tecnologia e talento excepcional.
                 </p>
               </div>
