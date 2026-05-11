@@ -1,30 +1,23 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { 
-  Zap, 
-  ChevronRight, 
-  Play, 
-  Pause, 
-  Mic2, 
-  Volume2, 
-  Music, 
-  Headphones, 
-  Radio, 
-  Tv, 
-  Star,
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Zap,
+  Play,
+  Pause,
+  Mic2,
+  Music,
+  Headphones,
+  Radio,
+  Tv,
   CheckCircle2,
   Waves,
   MessageSquare,
   ArrowUpRight,
-  Sparkles,
-  RefreshCw,
-  Download,
   Menu,
   X
 } from 'lucide-react';
-import Image from 'next/image';
 
 const voices = [
   { id: 1, name: 'AMÓS HENRIQUE', tone: 'Impacto / Jovem', type: 'Varejo / Spots', demoUrl: '/audio/amos-henrique-20.mp4' },
@@ -431,24 +424,12 @@ export default function Home() {
             <div className="absolute inset-0 bg-[#0a0a0a]" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#FF2D2D]/[0.02] blur-[150px] rounded-full" />
             
-            {/* The "Highlighted" Image Container */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 0.4, scale: 1 }}
-              transition={{ duration: 2, ease: "easeOut" }}
-              className="absolute right-[-10%] top-0 w-full h-full lg:w-3/4"
-            >
-              <Image 
-                src="https://picsum.photos/seed/jp-studio-pro/1920/1080" 
-                alt="JP Produções Highlihgt"
-                fill
-                className="object-cover object-right grayscale hover:grayscale-0 transition-all duration-1000"
-                priority
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
+            {/* Atmospheric gradient accent */}
+            <div className="absolute right-0 top-0 w-full h-full lg:w-3/4 pointer-events-none">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-[#FF2D2D]/[0.04]" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
-            </motion.div>
+              <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#FF2D2D]/[0.05] blur-[120px] rounded-full" />
+            </div>
           </div>
 
           <div className="container mx-auto grid lg:grid-cols-2 gap-12 lg:gap-24 items-center relative z-20">
@@ -997,18 +978,9 @@ function BentoCard({ icon, title, desc, span = "", image = "", onAction }: any) 
       whileHover={{ y: -10 }}
       className={`glass rounded-[2rem] p-6 sm:p-8 md:p-12 relative overflow-hidden group min-h-[300px] md:min-h-[350px] flex flex-col justify-between transition-all duration-500 hover:border-white/20 ${span}`}
     >
-      {image && (
-        <div className="absolute inset-0 z-0">
-          <Image 
-            src={image} 
-            alt={title} 
-            fill 
-            className="object-cover opacity-10 group-hover:opacity-20 transition-all duration-1000 scale-105 group-hover:scale-110 grayscale" 
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-        </div>
-      )}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-[#FF2D2D]/[0.03] group-hover:to-[#FF2D2D]/[0.06] transition-all duration-700" />
+      </div>
       
       <div className="relative z-10 text-center lg:text-left mx-auto lg:mx-0 w-full mb-8">
         <div className="w-14 h-14 glass rounded-2xl flex items-center justify-center text-[#FF2D2D] mb-8 mx-auto lg:mx-0 group-hover:bg-[#FF2D2D] group-hover:text-white transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(255,45,45,0.3)]">
@@ -1052,32 +1024,6 @@ function VoiceCard({
   progress?: number,
   onTogglePlay?: (playing: boolean) => void
 }) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x);
-  const mouseYSpring = useSpring(y);
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    const xPct = mouseX / rect.width - 0.5;
-    const yPct = mouseY / rect.height - 0.5;
-
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   const togglePlay = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (onTogglePlay) {
@@ -1091,15 +1037,8 @@ function VoiceCard({
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.01 }}
       onClick={onSelect}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-      }}
-      transition={{ delay: index * 0.1 }}
-      className={`p-8 glass rounded-[2.5rem] transition-all group flex flex-col gap-8 cursor-pointer relative perspective-[1000px] hover:bg-white/[0.04] ${isSelected ? 'border-[#FF2D2D] bg-[#FF2D2D]/5 shadow-[0_0_40px_rgba(255,45,45,0.1)]' : 'hover:border-white/20'}`}
+      transition={{ delay: index * 0.05 }}
+      className={`p-8 glass rounded-[2.5rem] transition-all group flex flex-col gap-8 cursor-pointer relative hover:bg-white/[0.04] ${isSelected ? 'border-[#FF2D2D] bg-[#FF2D2D]/5 shadow-[0_0_40px_rgba(255,45,45,0.1)]' : 'hover:border-white/20'}`}
     >
       <div className="flex justify-between items-start w-full relative z-10">
           <div className="flex gap-2 items-center">
@@ -1148,8 +1087,7 @@ function VoiceCard({
           )})}
       </div>
       
-      <motion.button 
-        style={{ translateZ: 20 }}
+      <motion.button
         onClick={togglePlay}
         className={`flex items-center justify-center gap-4 py-4 rounded-2xl border transition-all w-full ${isSelected ? 'bg-[#FF2D2D] border-transparent text-white' : 'bg-white/5 border-white/[0.05] group-hover:border-[#FF2D2D]/30 group-hover:bg-[#FF2D2D]/5 text-white/40'}`}
       >
