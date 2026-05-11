@@ -16,27 +16,32 @@ import {
   MessageSquare,
   ArrowUpRight,
   Menu,
-  X
+  X,
+  Sparkles,
+  Search,
+  Clock,
+  Package,
+  Cpu,
 } from 'lucide-react';
 
 const voices = [
-  { id: 1, name: 'AMÓS HENRIQUE', tone: 'Impacto / Jovem', type: 'Varejo / Spots', demoUrl: '/audio/amos-henrique-20.mp4' },
-  { id: 2, name: 'CAIO DOLGLAS', tone: 'Suave / Versátil', type: 'Institucional / Narração', demoUrl: '/audio/caio-dolglas-8.mp4' },
-  { id: 3, name: 'FLY DULTRA', tone: 'Impacto / Forte', type: 'Comercial / Varejo', demoUrl: '/audio/fly-dultra-impacto.mp4' },
-  { id: 4, name: 'ESTER SUFALATE', tone: 'Narrativa / Clara', type: 'Documentário / Podcast', demoUrl: '/audio/ester-sufalate-gs.mp4' },
-  { id: 5, name: 'EXDRAS LUIZ', tone: 'Jovem / Versátil', type: 'Podcasts / Spots', demoUrl: '/audio/exdras-luiz-27.mp4' },
-  { id: 6, name: 'CLAUDIA LAOMEDIA', tone: 'Elegante / Calma', type: 'Audiobook / Treinamento', demoUrl: '/audio/claudia-laomedia-gs.mp4' },
-  { id: 7, name: 'MARCO LEANDRO', tone: 'Energético / Impacto', type: 'Varejo / Spots', demoUrl: '/audio/marco-leandro-energetico.mp4' },
-  { id: 8, name: 'SONIA DISPINA', tone: 'Suave / Versátil', type: 'Institucional / Narração', demoUrl: '/audio/sonia-dispina-gs.mp4' },
-  { id: 9, name: 'RICARDO DULTRA', tone: 'Grave / Sóbrio', type: 'Institucional / Político', demoUrl: '/audio/ricardo-dultra-4.mp4' },
-  { id: 10, name: 'ROSA EDI', tone: 'Pop / Jovem', type: 'Podcasts / Spots', demoUrl: '/audio/rosa-edi-26.mp4' },
-  { id: 11, name: 'JOAB TRINDADE', tone: 'Versátil / Comercial', type: 'Varejo / Chamadas', demoUrl: '/audio/joab-trindade-5.mp4' },
-  { id: 12, name: 'MICHAEL DOLGLAS', tone: 'Dinâmico / Jovem', type: 'Games / Streaming', demoUrl: '/audio/michael-dolglas-32.mp4' },
-  { id: 13, name: 'MISS JÔ', tone: 'Expressiva / Forte', type: 'Comercial / Spots', demoUrl: '/audio/miss-jo-19.mp4' },
-  { id: 14, name: 'JUNIOR TRINDADE', tone: 'Impacto / Grave', type: 'Varejo / Chamadas', demoUrl: '/audio/junior-trindade-15.mp4' },
-  { id: 15, name: 'GEOVANE DULTRA', tone: 'Sério / Confiável', type: 'Institucional / Notícias', demoUrl: '/audio/geovane-dultra-12.mp4' },
-  { id: 16, name: 'MARRI GACRUX', tone: 'Versátil / Madura', type: 'Institucional / Narração', demoUrl: '/audio/marri-gacrux-gs.mp4' },
-  { id: 17, name: 'KELY VINDEMIATRIX', tone: 'Suave / Elegante', type: 'Comercial / Varejo', demoUrl: '/audio/kely-vindemiatrix-gs.mp4' },
+  { id: 1, name: 'AMÓS HENRIQUE', tone: 'Impacto / Jovem', type: 'Varejo / Spots', demoUrl: '/audio/amos-henrique-20.mp4', category: 'Varejo' },
+  { id: 2, name: 'CAIO DOLGLAS', tone: 'Suave / Versátil', type: 'Institucional / Narração', demoUrl: '/audio/caio-dolglas-8.mp4', category: 'Institucional' },
+  { id: 3, name: 'FLY DULTRA', tone: 'Impacto / Forte', type: 'Comercial / Varejo', demoUrl: '/audio/fly-dultra-impacto.mp4', category: 'Varejo' },
+  { id: 4, name: 'ESTER SUFALATE', tone: 'Narrativa / Clara', type: 'Documentário / Podcast', demoUrl: '/audio/ester-sufalate-gs.mp4', category: 'Narrativa' },
+  { id: 5, name: 'EXDRAS LUIZ', tone: 'Jovem / Versátil', type: 'Podcasts / Spots', demoUrl: '/audio/exdras-luiz-27.mp4', category: 'Jovem' },
+  { id: 6, name: 'CLAUDIA LAOMEDIA', tone: 'Elegante / Calma', type: 'Audiobook / Treinamento', demoUrl: '/audio/claudia-laomedia-gs.mp4', category: 'Institucional' },
+  { id: 7, name: 'MARCO LEANDRO', tone: 'Energético / Impacto', type: 'Varejo / Spots', demoUrl: '/audio/marco-leandro-energetico.mp4', category: 'Varejo' },
+  { id: 8, name: 'SONIA DISPINA', tone: 'Suave / Versátil', type: 'Institucional / Narração', demoUrl: '/audio/sonia-dispina-gs.mp4', category: 'Institucional' },
+  { id: 9, name: 'RICARDO DULTRA', tone: 'Grave / Sóbrio', type: 'Institucional / Político', demoUrl: '/audio/ricardo-dultra-4.mp4', category: 'Grave' },
+  { id: 10, name: 'ROSA EDI', tone: 'Pop / Jovem', type: 'Podcasts / Spots', demoUrl: '/audio/rosa-edi-26.mp4', category: 'Jovem' },
+  { id: 11, name: 'JOAB TRINDADE', tone: 'Versátil / Comercial', type: 'Varejo / Chamadas', demoUrl: '/audio/joab-trindade-5.mp4', category: 'Varejo' },
+  { id: 12, name: 'MICHAEL DOLGLAS', tone: 'Dinâmico / Jovem', type: 'Games / Streaming', demoUrl: '/audio/michael-dolglas-32.mp4', category: 'Jovem' },
+  { id: 13, name: 'MISS JÔ', tone: 'Expressiva / Forte', type: 'Comercial / Spots', demoUrl: '/audio/miss-jo-19.mp4', category: 'Varejo' },
+  { id: 14, name: 'JUNIOR TRINDADE', tone: 'Impacto / Grave', type: 'Varejo / Chamadas', demoUrl: '/audio/junior-trindade-15.mp4', category: 'Grave' },
+  { id: 15, name: 'GEOVANE DULTRA', tone: 'Sério / Confiável', type: 'Institucional / Notícias', demoUrl: '/audio/geovane-dultra-12.mp4', category: 'Narrativa' },
+  { id: 16, name: 'MARRI GACRUX', tone: 'Versátil / Madura', type: 'Institucional / Narração', demoUrl: '/audio/marri-gacrux-gs.mp4', category: 'Institucional' },
+  { id: 17, name: 'KELY VINDEMIATRIX', tone: 'Suave / Elegante', type: 'Comercial / Varejo', demoUrl: '/audio/kely-vindemiatrix-gs.mp4', category: 'Varejo' },
 ];
 
 export default function Home() {
@@ -56,6 +61,17 @@ export default function Home() {
   const [demoProgress, setDemoProgress] = useState(0);
   const [demoDuration, setDemoDuration] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [aiNiche, setAiNiche] = useState('');
+  const [aiPromotion, setAiPromotion] = useState('');
+  const [aiProduct, setAiProduct] = useState('');
+  const [aiCity, setAiCity] = useState('');
+  const [generatedScript, setGeneratedScript] = useState('');
+  const [isGeneratingScript, setIsGeneratingScript] = useState(false);
+  const [aiError, setAiError] = useState<string | null>(null);
+  const [trackingSearch, setTrackingSearch] = useState('');
+  const [foundOrder, setFoundOrder] = useState<any | null>(null);
+  const [trackingError, setTrackingError] = useState<string | null>(null);
+  const [voiceCategory, setVoiceCategory] = useState('Todos');
 
   const selectServiceAndScroll = (serviceName: string, style: string) => {
     setSelectedService(serviceName);
@@ -64,6 +80,48 @@ export default function Home() {
   };
 
   const calculatedPrice = selectedService === 'Spot com Jingle (Completo)' ? 'R$ 100,00' : 'R$ 50,00';
+
+  const generateScript = async () => {
+    if (!aiNiche.trim() || !aiPromotion.trim()) {
+      setAiError('Preencha ao menos o nicho e a promoção.');
+      return;
+    }
+    setIsGeneratingScript(true);
+    setAiError(null);
+    setGeneratedScript('');
+    try {
+      const res = await fetch('/api/generate-script', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ niche: aiNiche, promotion: aiPromotion, product: aiProduct, city: aiCity }),
+      });
+      const data = await res.json();
+      if (data.script) setGeneratedScript(data.script);
+      else setAiError(data.error || 'Erro ao gerar roteiro. Tente novamente.');
+    } catch {
+      setAiError('Erro de conexão. Tente novamente.');
+    } finally {
+      setIsGeneratingScript(false);
+    }
+  };
+
+  const searchOrder = () => {
+    setFoundOrder(null);
+    setTrackingError(null);
+    if (!trackingSearch.trim()) return;
+    const allOrders: any[] = JSON.parse(localStorage.getItem('jp_orders') || '[]');
+    const q = trackingSearch.trim();
+    const found = allOrders.find(o =>
+      o.id === q.toUpperCase() ||
+      o.whatsapp?.replace(/\D/g, '').includes(q.replace(/\D/g, ''))
+    );
+    if (found) setFoundOrder(found);
+    else setTrackingError('Pedido não encontrado. Verifique o ID ou WhatsApp.');
+  };
+
+  const ORDER_STEPS = ['Novo pedido', 'Em análise', 'Em produção', 'Aguardando aprovação', 'Finalizado', 'Entregue'];
+  const STEP_LABELS = ['Pedido Recebido', 'Em Análise', 'Em Produção', 'Prévia Enviada', 'Finalizado', 'Entregue'];
+  const STEP_ICONS = ['📥', '🔍', '🎙️', '✉️', '✅', '🎧'];
 
   const saveOrder = (newOrder: any) => {
     const existingOrders = JSON.parse(localStorage.getItem('jp_orders') || '[]');
@@ -157,9 +215,9 @@ export default function Home() {
         
         <div className="flex items-center gap-4 md:gap-8">
           <div className="hidden md:flex items-center gap-8">
-            {['Serviços', 'Vozes', 'Studio'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="text-sm font-medium text-white/40 hover:text-white transition-colors">
-                {item}
+            {[['Serviços','serviços'],['IA','ia'],['Vozes','vozes'],['Pedidos','pedidos'],['Studio','studio']].map(([label, id]) => (
+              <a key={id} href={`#${id}`} className="text-sm font-medium text-white/40 hover:text-white transition-colors">
+                {label === 'IA' ? <span className="text-[#FF2D2D]/80 hover:text-[#FF2D2D]">{label}</span> : label}
               </a>
             ))}
           </div>
@@ -184,17 +242,17 @@ export default function Home() {
               className="absolute top-full left-0 w-full px-6 py-8 md:hidden z-40"
             >
               <div className="glass-dark rounded-[2rem] border border-white/5 p-8 flex flex-col gap-6 shadow-2xl">
-                {['Serviços', 'Vozes', 'Studio'].map((item, idx) => (
+                {[['Serviços','serviços'],['IA','ia'],['Vozes','vozes'],['Pedidos','pedidos'],['Studio','studio']].map(([label, id], idx) => (
                   <motion.a
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
+                    key={id}
+                    href={`#${id}`}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.1 }}
                     onClick={() => setIsMenuOpen(false)}
                     className="text-2xl font-display font-medium text-white/60 hover:text-[#FF2D2D] transition-colors flex items-center justify-between group"
                   >
-                    {item}
+                    {label}
                     <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                   </motion.a>
                 ))}
@@ -564,6 +622,19 @@ export default function Home() {
               <div className="absolute -top-10 -right-10 w-48 h-48 bg-white/5 blur-[80px] rounded-full pointer-events-none" />
             </div>
           </div>
+
+          {/* Hero waveform */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-end gap-[3px] opacity-20 pointer-events-none">
+            {[3,5,9,14,9,16,11,7,4,9,13,20,13,9,6,22,15,9,5,11,18,11,7,4,13,9,6,16,11,7,4,9,13,18,11,7,4,9,6,3].map((h, i) => (
+              <motion.div
+                key={i}
+                animate={{ height: [h, h * 2 + 4, h] }}
+                transition={{ duration: 1.2 + (i % 7) * 0.15, repeat: Infinity, delay: i * 0.04, ease: 'easeInOut' }}
+                className="w-[3px] bg-[#FF2D2D] rounded-full"
+                style={{ height: h }}
+              />
+            ))}
+          </div>
         </section>
 
         {/* BRANDS MARQUEE (CREDIBILITY) */}
@@ -578,6 +649,97 @@ export default function Home() {
                 ))}
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* AI SCRIPT GENERATOR */}
+        <section id="ia" className="py-32 px-6 md:px-12 bg-[#060606] relative">
+          <div className="container mx-auto max-w-4xl">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <div className="text-center mb-16">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FF2D2D]/10 border border-[#FF2D2D]/20 text-[#FF2D2D] text-[10px] font-black tracking-[0.3em] uppercase mb-6">
+                  <Sparkles className="w-3 h-3" />
+                  IA GENERATIVA
+                </div>
+                <h2 className="text-4xl md:text-6xl font-display font-medium tracking-tight text-white leading-tight mb-4">
+                  Gere seu roteiro <br /><span className="text-white/30">com inteligência artificial.</span>
+                </h2>
+                <p className="text-white/40 text-lg max-w-xl mx-auto">Descreva seu negócio e a IA cria um roteiro comercial profissional em segundos.</p>
+              </div>
+
+              <div className="glass rounded-[3rem] p-8 md:p-12 border border-white/[0.05] relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FF2D2D]/30 to-transparent" />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                  {[
+                    { label: 'Nicho / Negócio', placeholder: 'Ex: Pizzaria, Academia, Loja de roupas...', value: aiNiche, set: setAiNiche, required: true },
+                    { label: 'Promoção / Oferta', placeholder: 'Ex: 50% off, Compre 1 leve 2...', value: aiPromotion, set: setAiPromotion, required: true },
+                    { label: 'Produto', placeholder: 'Ex: Pizza Família, Camisetas...', value: aiProduct, set: setAiProduct, required: false },
+                    { label: 'Cidade', placeholder: 'Ex: Recife, São Paulo...', value: aiCity, set: setAiCity, required: false },
+                  ].map(({ label, placeholder, value, set, required }) => (
+                    <div key={label} className="p-4 glass-dark rounded-2xl border border-white/5 focus-within:border-[#FF2D2D]/30 transition-all">
+                      <label className="text-[9px] text-white/20 uppercase font-black tracking-widest block mb-2">
+                        {label} {!required && <span className="text-white/10">(opcional)</span>}
+                      </label>
+                      <input
+                        type="text"
+                        placeholder={placeholder}
+                        value={value}
+                        onChange={(e) => set(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && generateScript()}
+                        className="bg-transparent text-white font-medium outline-none w-full placeholder:text-white/10 text-sm"
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {aiError && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[#FF2D2D] text-xs font-bold uppercase tracking-wider mb-4">{aiError}</motion.p>}
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                  onClick={generateScript}
+                  disabled={isGeneratingScript}
+                  className="w-full py-5 bg-[#FF2D2D] text-white rounded-2xl font-bold uppercase tracking-[0.2em] text-sm shadow-[0_20px_50px_rgba(255,45,45,0.3)] hover:brightness-110 transition-all flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {isGeneratingScript ? (
+                    <>
+                      <div className="flex gap-1 items-end h-5">
+                        {[4,8,12,8,14,8,4,10,6,4].map((h, i) => (
+                          <motion.div key={i} animate={{ height: [h, h * 1.8, h] }} transition={{ duration: 0.5, repeat: Infinity, delay: i * 0.08 }} className="w-1 bg-white rounded-full" style={{ height: h }} />
+                        ))}
+                      </div>
+                      Gerando roteiro...
+                    </>
+                  ) : (
+                    <><Cpu className="w-4 h-4" /> Gerar Roteiro com IA</>
+                  )}
+                </motion.button>
+
+                <AnimatePresence>
+                  {generatedScript && (
+                    <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-6">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="h-px flex-1 bg-white/5" />
+                        <span className="text-[9px] text-[#FF2D2D] uppercase font-black tracking-widest flex items-center gap-1"><Sparkles className="w-3 h-3" /> Roteiro Gerado</span>
+                        <div className="h-px flex-1 bg-white/5" />
+                      </div>
+                      <div className="p-6 bg-[#FF2D2D]/[0.04] border border-[#FF2D2D]/20 rounded-2xl relative">
+                        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FF2D2D]/40 to-transparent rounded-t-2xl" />
+                        <p className="text-white/85 leading-relaxed font-medium text-sm whitespace-pre-wrap">{generatedScript}</p>
+                      </div>
+                      <motion.button
+                        whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                        onClick={() => { setScript(generatedScript); document.getElementById('studio')?.scrollIntoView({ behavior: 'smooth' }); }}
+                        className="mt-4 w-full py-4 glass-dark border border-[#FF2D2D]/30 text-[#FF2D2D] rounded-2xl font-bold uppercase tracking-[0.15em] text-sm hover:bg-[#FF2D2D]/10 transition-all flex items-center justify-center gap-2"
+                      >
+                        <CheckCircle2 className="w-4 h-4" />
+                        Usar esse roteiro no pedido
+                      </motion.button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
           </div>
         </section>
 
@@ -640,8 +802,25 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Category filter */}
+            <div className="flex gap-2 overflow-x-auto pb-4 mb-8 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
+              {['Todos', 'Varejo', 'Institucional', 'Jovem', 'Narrativa', 'Grave'].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setVoiceCategory(cat)}
+                  className={`flex-shrink-0 px-4 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all ${
+                    voiceCategory === cat
+                      ? 'bg-[#FF2D2D] text-white shadow-[0_0_15px_rgba(255,45,45,0.4)]'
+                      : 'glass text-white/40 hover:text-white border border-white/5'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
             <div className="flex gap-6 overflow-x-auto pb-6 pr-6 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
-              {voices.map((voice, i) => (
+              {voices.filter(v => voiceCategory === 'Todos' || v.category === voiceCategory).map((voice, i) => (
                 <div key={voice.id} className="flex-shrink-0 w-[300px] snap-start">
                 <VoiceCard
                   voice={voice}
@@ -889,6 +1068,111 @@ export default function Home() {
                 </div>
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* RASTREAMENTO DE PEDIDO */}
+        <section id="pedidos" className="py-32 px-6 md:px-12 bg-[#060606] relative">
+          <div className="container mx-auto max-w-3xl">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+              <span className="text-[#FF2D2D] text-[10px] font-bold uppercase tracking-[0.4em] block mb-4">RASTREAMENTO</span>
+              <h2 className="text-4xl md:text-6xl font-display font-medium tracking-tight text-white leading-tight">
+                Acompanhe seu <span className="text-white/30">pedido.</span>
+              </h2>
+              <p className="text-white/40 text-lg mt-4">Informe o ID do pedido ou seu WhatsApp para ver o status.</p>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="glass rounded-[2rem] p-6 md:p-8 border border-white/[0.05] mb-6">
+              <div className="flex gap-3">
+                <div className="flex-1 p-4 glass-dark rounded-2xl border border-white/5 focus-within:border-[#FF2D2D]/30 transition-all">
+                  <input
+                    type="text"
+                    placeholder="Ex: JP-ABC123 ou (81) 99999-9999"
+                    value={trackingSearch}
+                    onChange={(e) => setTrackingSearch(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && searchOrder()}
+                    className="bg-transparent text-white font-medium outline-none w-full placeholder:text-white/20 text-sm"
+                  />
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                  onClick={searchOrder}
+                  className="px-6 py-4 bg-[#FF2D2D] text-white rounded-2xl font-bold uppercase tracking-wider text-sm shadow-[0_10px_30px_rgba(255,45,45,0.3)] hover:brightness-110 transition-all flex items-center gap-2 whitespace-nowrap"
+                >
+                  <Search className="w-4 h-4" />
+                  Buscar
+                </motion.button>
+              </div>
+              {trackingError && <p className="text-[#FF2D2D] text-xs font-bold uppercase tracking-wider mt-3">{trackingError}</p>}
+            </motion.div>
+
+            <AnimatePresence>
+              {foundOrder && (
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="glass rounded-[2rem] p-8 border border-white/[0.05]">
+                  {/* Order header */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-8 border-b border-white/5">
+                    <div>
+                      <p className="text-[10px] text-white/20 uppercase font-black tracking-widest mb-1">{foundOrder.id}</p>
+                      <h3 className="text-2xl font-display font-medium text-white uppercase">{foundOrder.nomeCliente}</h3>
+                      <p className="text-sm text-white/40 mt-1">{foundOrder.tipoServico} · {foundOrder.valorEstimado}</p>
+                    </div>
+                    <div className={`px-4 py-2 rounded-full text-[9px] font-black uppercase tracking-widest border self-start ${
+                      foundOrder.status === 'Novo pedido' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
+                      foundOrder.status === 'Em produção' ? 'bg-[#FF2D2D]/10 text-[#FF2D2D] border-[#FF2D2D]/20' :
+                      ['Finalizado','Entregue'].includes(foundOrder.status) ? 'bg-green-500/10 text-green-400 border-green-500/20' :
+                      'bg-white/10 text-white/40 border-white/10'
+                    }`}>{foundOrder.status}</div>
+                  </div>
+
+                  {/* Timeline */}
+                  <div className="space-y-5 mb-8">
+                    {ORDER_STEPS.map((stepStatus, i) => {
+                      const currentIdx = ORDER_STEPS.indexOf(foundOrder.status);
+                      const isActive = i <= currentIdx;
+                      const isCurrent = i === currentIdx;
+                      return (
+                        <div key={stepStatus} className="flex items-center gap-4">
+                          <motion.div
+                            animate={isCurrent ? { boxShadow: ['0 0 0px rgba(255,45,45,0)', '0 0 16px rgba(255,45,45,0.5)', '0 0 0px rgba(255,45,45,0)'] } : {}}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className={`w-10 h-10 rounded-full flex items-center justify-center text-base shrink-0 transition-all ${isActive ? 'bg-[#FF2D2D]/20' : 'bg-white/5'}`}
+                          >
+                            <span>{STEP_ICONS[i]}</span>
+                          </motion.div>
+                          <div className="flex-1">
+                            <p className={`text-sm font-bold transition-colors ${isActive ? 'text-white' : 'text-white/20'}`}>{STEP_LABELS[i]}</p>
+                            {isCurrent && <p className="text-[10px] text-[#FF2D2D] uppercase font-black tracking-widest mt-0.5 flex items-center gap-1"><Clock className="w-2.5 h-2.5" /> Status atual</p>}
+                          </div>
+                          {isActive && <div className={`w-2 h-2 rounded-full ${isCurrent ? 'bg-[#FF2D2D] animate-pulse' : 'bg-[#FF2D2D]/30'}`} />}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Progress bar */}
+                  <div className="pt-6 border-t border-white/5">
+                    {(() => {
+                      const pct = Math.round((ORDER_STEPS.indexOf(foundOrder.status) + 1) / ORDER_STEPS.length * 100);
+                      return (
+                        <>
+                          <div className="flex justify-between text-[9px] text-white/20 uppercase font-black tracking-widest mb-2">
+                            <span>Progresso</span><span>{pct}%</span>
+                          </div>
+                          <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              animate={{ width: `${pct}%` }}
+                              transition={{ duration: 1, ease: 'circOut' }}
+                              className="h-full bg-[#FF2D2D] rounded-full shadow-[0_0_10px_rgba(255,45,45,0.6)]"
+                            />
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </section>
 
